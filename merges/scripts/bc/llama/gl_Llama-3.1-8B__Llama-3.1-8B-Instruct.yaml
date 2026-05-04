@@ -1,0 +1,17 @@
+base_model: meta-llama/Llama-3.1-8B
+
+models:
+  - model: /data/evalero/models_original/gl_Llama-3.1-8B
+    parameters:
+      weight: 1.0
+  - model: meta-llama/Llama-3.1-8B-Instruct
+    parameters:
+      weight: 1.0
+
+merge_method: breadcrumbs
+
+parameters:
+  density: 0.9
+  gamma: 0.01
+
+dtype: bfloat16

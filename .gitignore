@@ -1,0 +1,27 @@
+# Runtime outputs
+evaluation/logs/
+evaluation/results/
+merges/logs/
+merges/models/
+
+# Slurm / logs
+*.out
+*.err
+*.log
+nohup.out
+.slurm/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+env/
+.env
+
+# Secrets
+*.env
+hf_token.txt
+token.txt
+secrets/
+credentials/
