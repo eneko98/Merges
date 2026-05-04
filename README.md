@@ -7,9 +7,9 @@
 [![Paper](https://img.shields.io/badge/Paper-arXiv%3A2603.28263-b31b1b.svg)](https://arxiv.org/abs/2603.28263)
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Collection-yellow)](https://huggingface.co/collections/HiTZ/merge-and-conquer)
 [![Conference](https://img.shields.io/badge/LREC-2026-blue)](https://lrec2026.info/)
-[![Code](https://img.shields.io/badge/Code-Scripts-lightgrey)](#repository-structure)
+[![Code](https://img.shields.io/badge/Code-Research%20scripts-lightgrey)](#repository-structure)
 
-This repository contains the model merging and evaluation scripts used in the paper
+This repository contains the model merging and evaluation scripts used in the paper  
 **[Merge and Conquer: Instructing Multilingual Models by Adding Target Language Weights](https://arxiv.org/abs/2603.28263)**.
 
 </div>
@@ -20,7 +20,7 @@ This repository contains the model merging and evaluation scripts used in the pa
 
 Large language models are still strongly centered on high-resource languages, while many low-resource languages lack the instruction data and computational resources required to repeatedly train strong instructed models. This project explores **model merging** as a lightweight alternative: combining the instruction-following capabilities of an instructed model with the target-language knowledge of language-adapted base models.
 
-The paper studies whether language-specific knowledge can be transferred into instruction-tuned LLMs by merging model weights, avoiding repeated instruction tuning whenever stronger instructed models become available. The experiments cover **Basque (EU), Galician (GL), Catalan (CA), Spanish (ES), and English (EN)** across Llama 3.1 and Qwen3 model families.
+The paper studies whether language-specific knowledge can be transferred into instruction-tuned LLMs by merging model weights, avoiding repeated instruction tuning whenever stronger instructed variants become available. The experiments cover **Basque (EU), Galician (GL), Catalan (CA), Spanish (ES), and English (EN)** across Llama 3.1 and Qwen3 model families.
 
 This repository is intended as a compact research artifact for the paper. It is not a general-purpose framework: it mainly contains the scripts used to run the model merging and evaluation experiments.
 
@@ -31,7 +31,7 @@ This repository is intended as a compact research artifact for the paper. It is 
 | Resource | Description |
 |---|---|
 | [Paper preprint](https://arxiv.org/abs/2603.28263) | Current arXiv version of the LREC 2026 paper. The ACL Anthology link will be added when available. |
-| [Hugging Face collection](https://huggingface.co/collections/HiTZ/merge-and-conquer) | Base models used in the experiments, together with the newly created IFEval variants for Basque and Galician. |
+| [Hugging Face collection](https://huggingface.co/collections/HiTZ/merge-and-conquer) | Released resources associated with the paper, including language-adapted base models and IFEval variants. |
 | [Repository scripts](#repository-structure) | Evaluation and model-merging scripts used in the experiments. |
 
 ---
@@ -70,7 +70,7 @@ The associated Hugging Face collection contains the public resources released wi
 
 ## Results at a glance
 
-The following tables summarize the main results reported in the paper. Bold values indicate the best result within the same model backbone or comparison group.
+The following tables and figures summarize the main results reported in the paper. Bold values indicate the best result within the same model backbone or comparison group.
 
 ### Base models after language adaptation
 
@@ -90,10 +90,20 @@ The main experiments compare instructed baselines, language-specific merges, and
 
 ### Merge method comparison
 
-We compare several merging methods, including Linear merging, Task Arithmetic, DARE, and Breadcrumbs. The results show that merge behavior depends on the model family and evaluation dimension, with language performance and instruction-following often showing different trade-offs.
+We compare several merging methods, including **Linear**, **Task Arithmetic**, **DARE**, and **Breadcrumbs**. Overall, Linear and Task Arithmetic are the strongest merging strategies in our experiments, but the results also show that merging behavior is highly dependent on the language, model family, and evaluation axis. In practice, merging is not a one-step recipe: it requires testing different models, methods, proportions, and evaluation settings.
 
 <p align="center">
   <img src="assets/merge_method_comparison.png" alt="Merge method comparison" width="900"/>
+</p>
+
+### Merge proportion ablation
+
+After comparing merging methods, we analyze the effect of the merge proportion \(w_i\) for **Linear** and **Task Arithmetic**, the two strongest overall strategies from the method comparison. Increasing \(w_i\) gives more influence to the language-adapted base model, which generally improves target-language transfer but can hurt instruction-following ability.
+
+The trade-off is smoother for Linear: benchmark and machine translation performance remain relatively stable as \(w_i\) increases. Task Arithmetic can achieve strong results at lower proportions, but it becomes much less stable and may collapse when \(w_i\) is too high, especially around \(w_i \geq 1.5\). Across languages, values in the range \(w_i \in [0.5, 1.0)\) usually provide robust performance.
+
+<p align="center">
+  <img src="assets/proportion_sweep_ablation.png" alt="Merge proportion ablation for Linear and Task Arithmetic" width="950"/>
 </p>
 
 ### Instruction following
@@ -103,6 +113,16 @@ IFEval is used to evaluate instruction-following ability after merging. The resu
 <p align="center">
   <img src="assets/ifeval_results.png" alt="IFEval results" width="700"/>
 </p>
+
+---
+
+## Main takeaway
+
+This work shows that model merging is a feasible alternative to continual pre-training and repeated instruction tuning for extending instructed LLMs to low-resource and under-represented languages. The merged models can transfer target-language proficiency from specialized base models into instructed variants, improving benchmark and machine translation performance while preserving instruction following in many settings.
+
+At the same time, the experiments show that merging is sensitive to the selected model family, target language, method, and merge proportion. Linear and Task Arithmetic perform best overall in our setting, but careful validation is necessary: there is no universally optimal merge configuration.
+
+Overall, the results suggest that model merging can help bridge the gap between efficiency and multilingual coverage, providing a practical path for adapting LLMs to languages with fewer available resources.
 
 ---
 
