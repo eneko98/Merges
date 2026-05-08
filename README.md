@@ -4,13 +4,14 @@
 
 ### Instructing multilingual models by adding target-language weights
 
-[![Paper](https://img.shields.io/badge/Paper-arXiv%3A2603.28263-b31b1b.svg)](https://arxiv.org/abs/2603.28263)
+[![Paper](https://img.shields.io/badge/Paper-LREC%202026%20Proceedings-b31b1b.svg)](https://lrec.elra.info/lrec2026-main-800)
+[![DOI](https://img.shields.io/badge/DOI-10.63317%2F4k6cgmb8djof-blue)](https://doi.org/10.63317/4k6cgmb8djof)
+[![arXiv](https://img.shields.io/badge/arXiv-2603.28263-red)](https://arxiv.org/abs/2603.28263)
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Collection-yellow)](https://huggingface.co/collections/HiTZ/merge-and-conquer)
-[![Conference](https://img.shields.io/badge/LREC-2026-blue)](https://lrec2026.info/)
 [![Code](https://img.shields.io/badge/Code-Research%20scripts-lightgrey)](#repository-structure)
 
-This repository contains the model merging and evaluation scripts used in the paper  
-**[Merge and Conquer: Instructing Multilingual Models by Adding Target Language Weights](https://arxiv.org/abs/2603.28263)**.
+This repository contains the model merging and evaluation scripts used in the LREC 2026 paper  
+**[Merge and Conquer: Instructing Multilingual Models by Adding Target Language Weights](https://lrec.elra.info/lrec2026-main-800)**.
 
 </div>
 
@@ -30,7 +31,8 @@ This repository is intended as a compact research artifact for the paper. It is 
 
 | Resource | Description |
 |---|---|
-| [Paper preprint](https://arxiv.org/abs/2603.28263) | Current arXiv version of the LREC 2026 paper. The ACL Anthology link will be added when available. |
+| [LREC 2026 proceedings paper](https://lrec.elra.info/lrec2026-main-800) | Official proceedings page for the paper. |
+| [arXiv preprint](https://arxiv.org/abs/2603.28263) | Preprint version of the paper. |
 | [Hugging Face collection](https://huggingface.co/collections/HiTZ/merge-and-conquer) | Released resources associated with the paper, including language-adapted base models and IFEval variants. |
 | [Repository scripts](#repository-structure) | Evaluation and model-merging scripts used in the experiments. |
 
@@ -162,19 +164,18 @@ sbatch merges/scripts/path/to/script.sh
 If you use this repository, the associated models, or the IFEval variants, please cite the paper:
 
 ```bibtex
-@misc{valero2026merge,
-  title         = {Merge and Conquer: Instructing Multilingual Models by Adding Target Language Weights},
-  author        = {Valero, Eneko and Ribalta i Albado, Maria and Sainz, Oscar and Perez, Naiara and Rigau, German},
-  year          = {2026},
-  eprint        = {2603.28263},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.CL},
-  doi           = {10.48550/arXiv.2603.28263},
-  url           = {https://arxiv.org/abs/2603.28263}
+@inproceedings{valero-etal-2026-merge,
+  title     = {Merge and Conquer: Instructing Multilingual Models by Adding Target Language Weights},
+  author    = {Valero, Eneko and Ribalta i Albado, Maria and Sainz, Oscar and Perez, Naiara and Rigau, German},
+  booktitle = {Proceedings of the Fifteenth Language Resources and Evaluation Conference (LREC 2026)},
+  year      = {2026},
+  pages     = {10192--10207},
+  publisher = {European Language Resources Association (ELRA)},
+  address   = {Palma, Mallorca, Spain},
+  doi       = {10.63317/4k6cgmb8djof},
+  url       = {https://lrec.elra.info/lrec2026-main-800}
 }
 ```
-
-The ACL Anthology citation will be added once the proceedings version is available.
 
 ---
 
